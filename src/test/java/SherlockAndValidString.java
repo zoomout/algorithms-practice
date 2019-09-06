@@ -56,7 +56,7 @@ public class SherlockAndValidString {
 
     @Test
     public void test5() {
-        String data = FileUtil.readFile("SherlockAndValidString.txt");
+        String data = FileUtil.readFile("SherlockAndValidString.txt").get(0);
         assertEquals("YES", isValid(data));
     }
 }

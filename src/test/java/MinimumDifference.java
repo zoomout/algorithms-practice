@@ -31,7 +31,7 @@ public class MinimumDifference {
 
     @Test
     public void test2() throws Exception {
-        String data = FileUtil.readFile("MinimumDifference.txt");
+        String data = FileUtil.readFile("MinimumDifference.txt").get(0);
         int[] ints = Arrays.stream(data.split(" ")).map(Integer::valueOf).mapToInt(x -> x).toArray();
         assertEquals(0, minimumAbsoluteDifference(ints));
     }
