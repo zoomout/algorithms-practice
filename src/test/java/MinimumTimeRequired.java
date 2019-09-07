@@ -7,31 +7,37 @@ import static org.junit.Assert.assertEquals;
 
 public class MinimumTimeRequired {
 
+    // total complexity: O(machines.length log (maxDays-minDays))
     static long minTime(long[] machines, long goal) {
 
-        long minDays = getMinDays(machines, goal);
-        long maxDays = getMaxDays(machines, goal);
+        long minDays = getMinDays(machines, goal); // O(machines.length)
+        long maxDays = getMaxDays(machines, goal); // O(machines.length)
 
-        while (true) {
+        while (true) { // O(log (maxDays-minDays))
             long days = (minDays + maxDays) / 2;
-            long sumPrevious = getSumForAmountOfDays(days - 1, machines);
-            long sumCurrent = getSumForAmountOfDays(days, machines);
-            if (sumPrevious < goal) {
-                if (sumCurrent >= goal) {
-                    return days;
-                }
+            long sumForPreviousDay = getSumForAmountOfDays(days - 1, machines); // O(machines.length)
+            long sumForCurrentDay = getSumForAmountOfDays(days, machines); // O(machines.length)
+            if (goal <= sumForPreviousDay) {
+                maxDays = days - 1;
+            } else if (goal > sumForCurrentDay) {
                 minDays = days + 1;
             } else {
-                maxDays = days - 1;
+                return days;
             }
         }
 
     }
 
+    /**
+     * Returns amount of days it takes if all machines work as the slowest one
+     */
     static long getMinDays(long[] machines, long goal) {
         return getAmountOfDays(machines, goal, Math::min);
     }
 
+     /**
+     * Returns amount of days it takes if all machines work as the fastest one
+     */
     static long getMaxDays(long[] machines, long goal) {
         return getAmountOfDays(machines, goal, Math::max);
     }
