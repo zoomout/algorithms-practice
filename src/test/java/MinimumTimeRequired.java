@@ -29,14 +29,14 @@ public class MinimumTimeRequired {
     }
 
     /**
-     * Returns amount of days it takes if all machines work as the slowest one
+     * Returns amount of days it takes if all machines work as the fastest one
      */
     static long getMinDays(long[] machines, long goal) {
         return getAmountOfDays(machines, goal, Math::min);
     }
 
      /**
-     * Returns amount of days it takes if all machines work as the fastest one
+     * Returns amount of days it takes if all machines work as the slowest one
      */
     static long getMaxDays(long[] machines, long goal) {
         return getAmountOfDays(machines, goal, Math::max);
